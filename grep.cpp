@@ -8,6 +8,7 @@
 
 using namespace std;
 
+int ooo;
 const int maxpalabus = 10;
 
 //Habilitar colores en la consola
@@ -15,7 +16,7 @@ void colorear(int color){
     HANDLE hConsola = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(hConsola, color);
 }
-//colorear
+//colorear palabras
 void ColorPalabra(string& texto, const string palcoloreadas[maxpalabus], int numpalabras){
 
     size_t pos = 0;
