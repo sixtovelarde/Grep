@@ -2,8 +2,6 @@
 #include<fstream>
 #include<string>
 #include<sstream>
-#include<cstring>
-#include<cstdio>
 #include<windows.h>
 
 using namespace std;
@@ -16,6 +14,7 @@ void colorear(int color){
     HANDLE hConsola = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(hConsola, color);
 }
+
 //colorear palabras
 void ColorPalabra(string& texto, const string palcoloreadas[maxpalabus], int numpalabras){
 
@@ -50,6 +49,7 @@ void ColorPalabra(string& texto, const string palcoloreadas[maxpalabus], int num
     cout << texto.substr(pos);
 }
 
+//buscar la palabra
 void grep(const char* pal, const char* name_pal){
 
     ifstream carpeta(name_pal);
@@ -68,7 +68,7 @@ void grep(const char* pal, const char* name_pal){
     }
 
 }
-
+ 
 int main (int argc, char* argv[]) {
  
     if (argc < 3) {
