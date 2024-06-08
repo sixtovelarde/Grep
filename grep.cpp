@@ -69,7 +69,7 @@ void grep(const char* pal, const char* name_pal){
 }
 
 int main (int argc, char* argv[]) {
-
+ 
     if (argc < 3) {
         cout << "Uso: grep <palabra a buscar> <carpeta1> [carpetas...]" << endl;
         return -1;
