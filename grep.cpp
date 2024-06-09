@@ -6,7 +6,6 @@
 
 using namespace std;
 
-int ooo;
 const int maxpalabus = 10;
 
 //Habilitar colores en la consola
@@ -69,19 +68,31 @@ void grep(const char* pal, const char* name_pal){
 
 }
  
-int main (int argc, char* argv[]) {
- 
-    if (argc < 3) {
-        cout << "Uso: grep <palabra a buscar> <carpeta1> [carpetas...]" << endl;
-        return -1;
-    } 
-    
-    else {
-        for (int i = 2; i < argc; i++) {
-            grep(argv[1], argv[i]);
-        }
+int main () {
+
+    colorear(FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+
+    ifstream archivobusq("../archivo_busqueda.txt");
+
+    if (!archivobusq.is_open()){
+
+        cout<<"Error abrir el archivo"<<endl;
+        return 1;
     }
 
+    stringstream datos;
+    datos<<archivobusq.rdbuf();
+    string texto = datos.str();
+
+    archivobusq.close();
+
+    cout<<"Ingrese la palabra que quiera resaltar: ";
+    string palcoloreadas;
+    cin >> palcoloreadas;
+
+    ColorPalabra(texto, &palcoloreadas, 1);
+
+    colorear(FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
 
     return 0;
 
