@@ -4,15 +4,19 @@
 #include<sstream>
 #include<windows.h>
 
+#define rainbow SetConsoleTextAttribute
+
 using namespace std;
 
 const int maxpalabus = 10;
+int num=0;
 
-//Habilitar colores en la consola
-void colorear(int color){
+//Habilitar pigmentos en la consola
+void colorear(int pigmentos){
     HANDLE hConsola = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hConsola, color);
+    rainbow(hConsola, pigmentos);
 }
+
 
 //colorear palabras
 void ColorPalabra(string& texto, const string palcoloreadas[maxpalabus], int numpalabras){
@@ -70,7 +74,12 @@ void grep(const char* pal, const char* name_pal){
  
 int main () {
 
-    colorear(FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+    //volver a habilitar los pigmentos en consola pero dentro del main
+    int pigmentos;
+    HANDLE hConsola = GetStdHandle(STD_OUTPUT_HANDLE);
+    rainbow(hConsola, pigmentos);
+
+    rainbow(hConsola, 1);
 
     ifstream archivobusq("../archivo_busqueda.txt");
 
@@ -86,14 +95,14 @@ int main () {
 
     archivobusq.close();
 
-    cout<<"Ingrese la palabra que quiera resaltar: ";
+    cout<<"Ingrese la palabra que desea resaltar: "<<endl;
     string palcoloreadas;
     cin >> palcoloreadas;
 
     ColorPalabra(texto, &palcoloreadas, 1);
 
-    colorear(FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
-
+    rainbow(hConsola, 2);
+    
     return 0;
 
 }
