@@ -1,99 +1,56 @@
-#include<iostream>
-#include<fstream>
-#include<string>
-#include<sstream>
-#include<windows.h>
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <algorithm>
+#include <windows.h>
 
 using namespace std;
 
-const int maxpalabus = 10;
-
-//Habilitar colores en la consola
-void colorear(int color){
+// Función para resaltar coincidencias en color
+void colorear(string palabra) {
     HANDLE hConsola = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hConsola, color);
+    SetConsoleTextAttribute(hConsola, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+    cout << palabra;
+    SetConsoleTextAttribute(hConsola, FOREGROUND_BLUE);
 }
 
-//colorear palabras
-void ColorPalabra(string& texto, const string palcoloreadas[maxpalabus], int numpalabras){
-
-    size_t pos = 0;
-    size_t encontradas;
-
-    while ((encontradas = texto.find_first_of(" \n\t", pos)) != string::npos){
-
-        string palabra = texto.substr(pos, encontradas - pos);
-        bool resaltar = false;
-
-        for (int i=0; i < numpalabras; i++){
-
-            if (palabra == palcoloreadas[i]){
-
-                resaltar = true;
-                break;
-            }
-        }
-
-        if (resaltar){
-            colorear(FOREGROUND_BLUE| FOREGROUND_INTENSITY);
-            cout << palabra;
-            colorear(FOREGROUND_GREEN | FOREGROUND_INTENSITY);
-        }
-        else {
-            cout << palabra;
-        }
-        cout << texto[encontradas];
-        pos = encontradas + 1;
-    }
-    cout << texto.substr(pos);
-}
-
-//buscar la palabra
-void grep(const char* pal, const char* name_pal){
-
-    ifstream carpeta(name_pal);
-    char cadena[1000];
-    int linea=0;
-
-    if (carpeta){
-
-        carpeta.getline(cadena, 1000);
-        linea++;
-
-        if (carpeta && strstr(cadena, pal)){
-
-            cout<<name_pal<<"("<<linea<<")"<<cadena<<endl;
-        }
+// Función para buscar coincidencias en un archivo
+void buscarCoincidencias(const string& archivo, const string& palabra) {
+    ifstream archivoEntrada(archivo);
+    if (!archivoEntrada.is_open()) {
+        cout << "Error al abrir el archivo." << endl;
+        return;
     }
 
+    string linea;
+    int numLineas = 0;
+    int numCoincidencias = 0;
+
+    while (getline(archivoEntrada, linea)) {
+        numLineas++;
+        size_t pos = linea.find(palabra);
+        while (pos != string::npos) {
+            numCoincidencias++;
+            colorear(linea.substr(pos, palabra.length()));
+            pos = linea.find(palabra, pos + 1);
+        }
+        cout << " (" << numLineas << ")" << linea << endl;
+    }
+
+    cout << "Total de líneas con coincidencias: " << numLineas << endl;
+    cout << "Total de coincidencias encontradas: " << numCoincidencias << endl;
 }
- 
-int main () {
 
-    colorear(FOREGROUND_BLUE | FOREGROUND_INTENSITY);
-
-    ifstream archivobusq("../archivo_busqueda.txt");
-
-    if (!archivobusq.is_open()){
-
-        cout<<"Error abrir el archivo"<<endl;
+int main(int argc, char* argv[]) {
+    if (argc != 3) {
+        cout << "Uso: " << argv[0] << " <archivo> <palabra>" << endl;
         return 1;
     }
 
-    stringstream datos;
-    datos<<archivobusq.rdbuf();
-    string texto = datos.str();
+    string archivo = argv[1];
+    string palabra = argv[2];
 
-    archivobusq.close();
-
-    cout<<"Ingrese la palabra que quiera resaltar: ";
-    string palcoloreadas;
-    cin >> palcoloreadas;
-
-    ColorPalabra(texto, &palcoloreadas, 1);
-
-    colorear(FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
+    buscarCoincidencias(archivo, palabra);
 
     return 0;
-
 }
