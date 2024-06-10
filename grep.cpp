@@ -16,7 +16,7 @@ void colorear(string palabra) {
 
 // Función para buscar coincidencias en un archivo
 void buscarCoincidencias(const string& archivo, const string& palabra) {
-    ifstream archivoEntrada(archivo);
+    ifstream archivoEntrada("../archivo_busqueda.txt");
     if (!archivoEntrada.is_open()) {
         cout << "Error al abrir el archivo." << endl;
         return;
@@ -37,7 +37,7 @@ void buscarCoincidencias(const string& archivo, const string& palabra) {
         cout << " (" << numLineas << ")" << linea << endl;
     }
 
-    cout << "Total de líneas con coincidencias: " << numLineas << endl;
+    cout << "Total de lineas con coincidencias: " << numLineas << endl;
     cout << "Total de coincidencias encontradas: " << numCoincidencias << endl;
 }
 
