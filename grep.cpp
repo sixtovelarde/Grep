@@ -1,8 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <algorithm>
 #include <windows.h>
+#include <conio.h>
 
 using namespace std;
 
@@ -52,5 +52,6 @@ int main(int argc, char* argv[]) {
 
     buscarCoincidencias(archivo, palabra);
 
+    getch();
     return 0;
 }
