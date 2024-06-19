@@ -43,7 +43,7 @@ void buscarCoincidencias(const string& archivo, const string& palabra) {
 
 int main(int argc, char* argv[]) {
     if (argc != 3) {
-        cout << "Uso: " << argv[0] << " 'archivo' 'palabra'" << endl;
+        cout << "Su uso: " << argv[0] << " 'archivo' 'palabra'" << endl;
         return 1;
     }
 
