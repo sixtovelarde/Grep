@@ -52,6 +52,5 @@ int main(int argc, char* argv[]) {
 
     buscarCoincidencias(archivo, palabra);
 
-    system("pause");
     return 0;
 }
