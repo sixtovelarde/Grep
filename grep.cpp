@@ -88,7 +88,7 @@ int main(int argc, char *argv[]){
             lineasCon_coincidencias++;
         }
     }
-
+    lineasCon_coincidencias == nrodelineas+lineasCon_coincidencias;
     cout << "\n\033[1;31mTotal de coincidencias: \033[0m" << total_coincidencias << endl;
     cout << "\033[1;31mTotal de lineas con coincidencias: \033[0m" << lineasCon_coincidencias << endl;
     file.close();
