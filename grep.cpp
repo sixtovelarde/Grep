@@ -9,10 +9,10 @@ using namespace std;
 //Imprmir instrucciones de uso
 void print_usage(const char *grep){
 
-    cout << "\n\033[1;31mUso: \033[1;33m" << grep << "\n\033[1;31m   INTRODUCIR LO SIGUIENTE EN EL ORDEN ESPECIFICO\n\n\033[1;36m  1ro- g++ -o main (nombrearchivo).cpp \033[1;35mSOLO SI ES LA 1RA VEZ QUE EJECUTAS EL PROGRAMA\033[1;36m"<<endl;
-    cout << "\n  2do- ./grep.exe (ruta COMPLETA del archivo) (palabra a buscar) (sensibilidad a mayusculas) (color resaltado)" << endl;
+    cout << "\n\033[1;31mUso: \033[1;33m" << grep << "\n\033[1;31m   INTRODUCIR LO SIGUIENTE EN EL ORDEN ESPECIFICO\n\n\033[1;36m  \033[1;31m1ro-\033[1;36m g++ -o main ../(nombrearchivo).cpp \033[1;35mSOLO SI ES LA 1RA VEZ QUE EJECUTAS EL PROGRAMA\033[1;36m"<<endl;
+    cout << "\n  \033[1;31m2do-\033[1;36m ./main.exe (ruta COMPLETA del archivo) (palabra a buscar) (sensibilidad a mayusculas) (color resaltado)" << endl;
     cout << "       \033[1;31m\nSensibilidad a mayusculas:\033[1;36m 1 para distinguir entre mayusculas y minusculas, 0 para ignorar" << endl;
-    cout << "       \033[1;31mColor resaltado:\033[1;36m (opciones: rojo, verde, azul, amarillo, magenta, cian)\n\033[1;35m     Recuerda cambiar los slags a '\033[1;33m/\033[1;35m'\033[0m\n" << endl;
+    cout << "       \033[1;31mColor resaltado:\033[1;36m (opciones: rojo, verde, azul, amarillo, magenta, cian)\n\033[1;35m     \nRecuerda cambiar los slags de la ruta del archivo donde vas a buscar a '\033[1;33m/\033[1;35m'\033[0m\n" << endl;
 }
 
 //declarar colores
@@ -89,8 +89,8 @@ int main(int argc, char *argv[]){
         }
     }
 
-    cout << "Total de coincidencias: " << total_coincidencias << endl;
-    cout << "Total de lineas con coincidencias: " << lineasCon_coincidencias << endl;
+    cout << "\n\033[1;31mTotal de coincidencias: \033[0m" << total_coincidencias << endl;
+    cout << "\033[1;31mTotal de lineas con coincidencias: \033[0m" << lineasCon_coincidencias << endl;
     file.close();
 
     return 0;
